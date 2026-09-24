@@ -9,12 +9,13 @@ public class L344 {
             i++;
             j--;
         }
-        for (int k = 0; k < s.length; k++) {
-            System.out.print(s[k]);
-        } 
     }
     public static void main(String[] args) {
         char s[] = {'h', 'e', 'l', 'l', 'o'};
         reverseString(s);
+
+        for (int k = 0; k < s.length; k++) {
+            System.out.print(s[k]);
+        } 
     }
 }
