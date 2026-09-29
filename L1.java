@@ -8,10 +8,10 @@ public class L1 {
 
         for (int i = 0; i < nums.length; i++) {
 
-            int complement = target - nums[i];
+            int lookingFor = target - nums[i];
 
-            if (map.containsKey(complement)) {
-                return new int[] { map.get(complement), i };
+            if (map.containsKey(lookingFor)) {
+                return new int[] { i, map.get(lookingFor) };
             }
 
             map.put(nums[i], i);
