@@ -2,20 +2,22 @@ public class L1541 {
     public static int minInsertions(String s) {
         int result = 0;
         int count = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '(') {
+        int i = 0;
+        while (i < s.length()) {
+            if(s.charAt(i) == '('){
                 count++;
-            } else {
-                if (i + 1 < s.length() && s.charAt(i + 1) == ')') {
-                    i++;
-                } else {
+                i++;
+            }else{
+                if(count > 0){
+                    count--;
+                }else{
                     result++;
                 }
-
-                if (count > 0) {
-                    count--;
-                } else {
+                if(i+1 < s.length() && s.   charAt(i+1) == ')'){
+                    i += 2;
+                }else{
                     result++;
+                    i++;
                 }
             }
         }
