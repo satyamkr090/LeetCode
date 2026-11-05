@@ -1,5 +1,4 @@
 package GfG;
-
 public class sumSubarray {
     public static int maxSubarraySum(int[] arr, int k) {
         int max = 0;
