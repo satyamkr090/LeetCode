@@ -1,5 +1,5 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 public class L2461 {
     public static long maximumSubarraySum(int[] nums, int k) {
@@ -27,45 +27,25 @@ public class L2461 {
         // }
         //return max;
 
-        long max = 0;
         long sum = 0;
-        Map<Integer, Integer> map = new HashMap<>();
-        int dups = 0;
-        for(int i=0; i<k; i++){
-            if(!map.containsKey(nums[i])){
-                map.put(nums[i], 0);
+        long max = 0;
+        Set<Integer> set = new HashSet<>();
+        int i = 0, j = 0 ;
+        while (j < nums.length) {
+            while(set.contains(nums[j])){
+                sum -= nums[i];
+                set.remove(nums[i]);
+                i++;
             }
-            map.put(nums[i], map.get(nums[i]) + 1);
-
-            sum = sum + nums[i];
-            
-            if(map.get(nums[i]) > 1){
-                dups++;
-            }
-        }
-        if(dups == 0){
-            max = Math.max(max, sum);
-        }
-        for(int i = k; i < nums.length; i++){
-            int numsToAdd = nums[i], 
-                numsToRemove = nums[i - k];
-            if(!map.containsKey(numsToAdd)){
-                map.put(numsToAdd, 0);
-            }
-            map.put(numsToAdd, map.get(numsToAdd) + 1);
-            if(map.get(numsToAdd) > 1){
-                dups++;
-            }
-            sum = sum + numsToAdd;
-
-            if(map.get(numsToRemove) > 1){
-                dups--;
-            }
-            map.put(numsToRemove, map.get(numsToRemove) - 1);
-            sum = sum - numsToRemove;
-            if(dups == 0){
+            sum += nums[j];
+            set.add(nums[j]);
+            if(j-i+1 == k){
                 max = Math.max(sum, max);
+                sum -= nums[i];
+                set.remove(nums[i]);
+                i++;
             }
+            j++;
         }
         return max;
     }
